@@ -2,6 +2,7 @@ const express = require("express");
 // const compression = require('compression')
 const bodyParser = require("body-parser");
 const path = require('path')
+const driveRoutes = require('./routes/drive')
 
 
 const app = express();
@@ -11,7 +12,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use("/", express.static(path.join(__dirname, "angular")))
+// app.use("/", express.static(path.join(__dirname, "angular")))
 
 
 
@@ -28,9 +29,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req,res,next)=> {
-  res.sendFile(path.join(__dirname ,"angular", "index.html"))
-})
+// app.use((req,res,next)=> {
+//   res.sendFile(path.join(__dirname ,"angular", "index.html"))
+// })
+
+app.use('/api/drive', driveRoutes)
+
 
 
 module.exports = app;
